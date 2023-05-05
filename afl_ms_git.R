@@ -7,7 +7,6 @@ library(googledrive)
 library(hrbrthemes)
 library(RColorBrewer)
 
-use_description()
 
 # Roster Pull -------------------------------------------------------------
 df_players <- map_dfr(2014:2022, fetch_player_stats_fryzigg) %>%
@@ -116,6 +115,8 @@ player_totals <- df_players %>%
                 team_fp_pergame) %>%
   mutate(player_fpoint_per_game = round(player_fpoint_per_game, digits = 2),
          team_fp_pergame = round(team_fp_pergame, digits = 2))
+
+write.csv(player_totals, "player_totals.csv")
 
 
 # Tables ------------------------------------------------------------------
@@ -226,3 +227,4 @@ team_totals %>%
         axis.text.y = element_text(size = 8))+
   scale_fill_manual(values = getPalette(colourCount))+
   scale_colour_manual(values = getPalette(colourCount))
+
